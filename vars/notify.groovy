@@ -1,0 +1,33 @@
+def success(String email) {
+    emailext(
+        to: email,
+        subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+        mimeType: 'text/html',
+        body: """
+        <h2 style="color:green;">Build Successful</h2>
+
+        <b>Job:</b> ${env.JOB_NAME}<br>
+        <b>Build:</b> #${env.BUILD_NUMBER}<br>
+        <b>Status:</b> SUCCESS<br>
+        <b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
+        """
+    )
+}
+
+def failed(String email) {
+    emailext(
+        to: email,
+        subject: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+        mimeType: 'text/html',
+        body: """
+        <h2 style="color:red;">Build Failed</h2>
+
+        <b>Job:</b> ${env.JOB_NAME}<br>
+        <b>Build:</b> #${env.BUILD_NUMBER}<br>
+        <b>Status:</b> FAILED<br>
+        <b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
+        """
+    )
+}
+
+return this
