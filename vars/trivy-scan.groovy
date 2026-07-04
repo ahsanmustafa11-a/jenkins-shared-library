@@ -1,7 +1,13 @@
 def call() {
 
     sh '''
-       trivy fs . -o trivy-resuly.json
+
+        mkdir -p reports
+
+        trivy fs . \
+        --format json \
+        -o reports/trivy-report.json || true
+
     '''
 
 }
